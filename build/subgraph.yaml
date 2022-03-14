@@ -1,0 +1,23 @@
+specVersion: 0.0.2
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: eth_liquidity_rewards
+    network: mumbai
+    source:
+      address: "0x8B037F5542a528Ca4D9E33523fFc10AD7093a33a"
+      abi: eth_liquidity_rewards
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Balance
+      abis:
+        - name: eth_liquidity_rewards
+          file: eth_liquidity_rewards/abis/eth_liquidity_rewards.json
+      eventHandlers:
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+      file: eth_liquidity_rewards/eth_liquidity_rewards.wasm
